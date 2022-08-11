@@ -1,0 +1,12 @@
+name: ZZoneCore
+version: '${project.version}'
+main: net.danh.zzonecore.ZZoneCore
+api-version: 1.17
+authors: [ VoChiDanh ]
+depend:
+  - MMOItems
+softdepend:
+  - PlaceholderAPI
+commands:
+  zzone:
+    description: ZZone
