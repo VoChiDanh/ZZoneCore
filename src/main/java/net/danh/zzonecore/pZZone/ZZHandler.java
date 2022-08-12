@@ -41,13 +41,13 @@ public class ZZHandler implements RPGHandler {
         }
 
         @Override
-        public double getStamina() {
-            return ZZStamina.getStamina(getPlayer());
+        public void setMana(double v) {
+            ZZMana.setMana(getPlayer(), (int) v);
         }
 
         @Override
-        public void setMana(double v) {
-            ZZMana.setMana(getPlayer(), (int) v);
+        public double getStamina() {
+            return ZZStamina.getStamina(getPlayer());
         }
 
         @Override

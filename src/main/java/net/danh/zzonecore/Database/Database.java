@@ -12,10 +12,10 @@ import java.util.UUID;
 import java.util.logging.Level;
 
 public abstract class Database {
-    JavaPlugin plugin;
-    Connection connection;
     // The name of the table we created back in SQLite class.
     public String table = "playerdata";
+    JavaPlugin plugin;
+    Connection connection;
 
     public Database(JavaPlugin instance) {
         plugin = instance;
