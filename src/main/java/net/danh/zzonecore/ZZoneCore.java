@@ -73,7 +73,7 @@ public final class ZZoneCore extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new Condition(), this);
             ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e Loaded system compatible with MythicMobs"));
             ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e Mechanics:"));
-            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e - zzonemechanic{action=[add/remove],type=[xp/level/mana/max_mana/stamina/max_stamina],amount=[number-number/number]}"));
+            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e - zzonemechanic{action=[add/remove];type=[xp/level/mana/max_mana/stamina/max_stamina];amount=[number-number/number]}"));
             ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e TargetConditions:"));
             ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e - zzonecondition{t=[xp/level/mana/max_mana/stamina/max_stamina];a=[number]} true"));
             ZZoneCore.getZZ().getLogger().info(Chat.colorize("&7"));
