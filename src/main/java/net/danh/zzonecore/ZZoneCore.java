@@ -49,11 +49,16 @@ public final class ZZoneCore extends JavaPlugin {
             new PlaceholderAPI().register();
         }
         ZZoneCore.getZZ().getLogger().info(Chat.colorize("&e-------------------- &bZZoneCore &e--------------------"));
-        if (isPaper()) {
-            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e Found server version: " + new NMSAssistant().getNMSVersion()));
-        } else {
-            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.FALSE.getSymbol() + "&e Found server version: " + new NMSAssistant().getNMSVersion()));
-            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.FALSE.getSymbol() + "&c Please use PaperMC for fully support"));
+        if (getServerType().equals(SERVER_TYPE.PAPER)) {
+            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e Found Server Version: " + new NMSAssistant().getNMSVersion() + " &9( " + SERVER_TYPE.PAPER.name() + " )"));
+        } else if (getServerType().equals(SERVER_TYPE.SPIGOT)) {
+            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e Found Server Version: " + new NMSAssistant().getNMSVersion() + " &9( " + SERVER_TYPE.SPIGOT.name() + " )"));
+            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&c Please use PaperMC for fully support"));
+        } else if (getServerType().equals(SERVER_TYPE.BUKKIT)) {
+            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&e Found Server Version: " + new NMSAssistant().getNMSVersion() + " &9( " + SERVER_TYPE.BUKKIT.name() + " )"));
+            ZZoneCore.getZZ().getLogger().info(Chat.colorize(Status.TRUE.getSymbol() + "&c Please use PaperMC for fully support"));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
         }
         ZZoneCore.getZZ().getLogger().info(Chat.colorize("&7"));
         if (getServer().getPluginManager().getPlugin("MMOItems") != null) {
@@ -141,12 +146,29 @@ public final class ZZoneCore extends JavaPlugin {
         }
     }
 
-    private boolean isPaper() {
+    public static SERVER_TYPE getServerType() {
+        if (hasClass("com.destroystokyo.paper.PaperConfig") || hasClass("io.papermc.paper.configuration.Configuration")) {
+            return SERVER_TYPE.PAPER;
+        } else if (hasClass("org.spigotmc.SpigotConfig")) {
+            return SERVER_TYPE.SPIGOT;
+        } else {
+            return SERVER_TYPE.BUKKIT;
+        }
+    }
+
+    private static boolean hasClass(String className) {
         try {
-            Class.forName("com.destroystokyo.paper.VersionHistoryManager$VersionData");
+            Class.forName(className);
             return true;
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException e) {
             return false;
         }
     }
+
+    public enum SERVER_TYPE {
+        PAPER,
+        SPIGOT,
+        BUKKIT
+    }
 }
+
