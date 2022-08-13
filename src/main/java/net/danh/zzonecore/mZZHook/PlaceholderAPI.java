@@ -44,7 +44,7 @@ public class PlaceholderAPI extends PlaceholderExpansion {
             return String.valueOf(ZZLevel.getLevel(p) * 1000);
         }
         if (args.equalsIgnoreCase("mana")) {
-            return String.valueOf(ZZMana.getMaxMana(p));
+            return String.valueOf(ZZMana.getMana(p));
         }
         if (args.equalsIgnoreCase("max_mana")) {
             return String.valueOf(ZZMana.getMaxMana(p));

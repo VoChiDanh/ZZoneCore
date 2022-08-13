@@ -35,10 +35,8 @@ public class ZZStamina {
     }
 
     public static void setStamina(Player p, Integer amount) {
-        if (amount <= getMaxStamina(p)) {
+        if (amount >= 0) {
             data.put(getData(p, mZZData.STAMINA), amount);
-        } else {
-            data.put(getData(p, mZZData.STAMINA), getMaxStamina(p));
         }
     }
 

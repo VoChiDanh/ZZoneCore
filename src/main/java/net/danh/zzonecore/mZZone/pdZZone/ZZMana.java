@@ -35,10 +35,8 @@ public class ZZMana {
     }
 
     public static void setMana(Player p, Integer amount) {
-        if (amount <= getMaxMana(p)) {
+        if (amount >= 0) {
             data.put(getData(p, mZZData.MANA), amount);
-        } else {
-            data.put(getData(p, mZZData.MANA), getMaxMana(p));
         }
     }
 
