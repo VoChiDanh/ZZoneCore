@@ -100,15 +100,19 @@ public abstract class Database {
         PreparedStatement ps = null;
         try {
             conn = getSQLConnection();
-            ps = conn.prepareStatement("UPDATE " + table + " SET player = ?, xp = ?, level = ?, mana = ?, max_mana = ?, stamina = ?, max_stamina = ?");
-            ps.setString(1, playerData.getPlayer().toString());
-            ps.setInt(2, playerData.getXP());
-            ps.setInt(3, playerData.getLevel());
-            ps.setInt(4, playerData.getMana());
-            ps.setInt(5, playerData.getMaxMana());
-            ps.setInt(6, playerData.getStamina());
-            ps.setInt(7, playerData.getMaxMana());
-            ps.executeUpdate();
+            ps = conn.prepareStatement("UPDATE " + table + " SET xp = ?, level = ?, mana = ?, max_mana = ?, stamina = ?, max_stamina = ? " +
+                    "WHERE player = ?");
+            conn.setAutoCommit(false);
+            ps.setInt(1, playerData.getXP());
+            ps.setInt(2, playerData.getLevel());
+            ps.setInt(3, playerData.getMana());
+            ps.setInt(4, playerData.getMaxMana());
+            ps.setInt(5, playerData.getStamina());
+            ps.setInt(6, playerData.getMaxMana());
+            ps.setString(7, playerData.getPlayer().toString());
+            ps.addBatch();
+            ps.executeBatch();
+            conn.commit();
         } catch (SQLException ex) {
             plugin.getLogger().log(Level.SEVERE, Errors.sqlConnectionExecute(), ex);
         } finally {
