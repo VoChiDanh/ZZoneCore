@@ -21,27 +21,31 @@ public class Condition implements IEntityCondition {
 
     @Override
     public boolean check(AbstractEntity abstractEntity) {
-        Player p = (Player) BukkitAdapter.adapt(abstractEntity);
-        if (p != null) {
-            if (condition_type.equalsIgnoreCase("xp")) {
-                return ZZXP.getXP(p) >= amount;
+        if (abstractEntity.isPlayer()) {
+            Player p = (Player) BukkitAdapter.adapt(abstractEntity);
+            if (p != null) {
+                if (condition_type.equalsIgnoreCase("xp")) {
+                    return ZZXP.getXP(p) >= amount;
+                }
+                if (condition_type.equalsIgnoreCase("level")) {
+                    return ZZLevel.getLevel(p) >= amount;
+                }
+                if (condition_type.equalsIgnoreCase("mana")) {
+                    return ZZMana.getMana(p) >= amount;
+                }
+                if (condition_type.equalsIgnoreCase("max_mana")) {
+                    return ZZMana.getMaxMana(p) >= amount;
+                }
+                if (condition_type.equalsIgnoreCase("stamina")) {
+                    return ZZStamina.getStamina(p) >= amount;
+                }
+                if (condition_type.equalsIgnoreCase("max_stamina")) {
+                    return ZZStamina.getMaxStamina(p) >= amount;
+                }
             }
-            if (condition_type.equalsIgnoreCase("level")) {
-                return ZZLevel.getLevel(p) >= amount;
-            }
-            if (condition_type.equalsIgnoreCase("mana")) {
-                return ZZMana.getMana(p) >= amount;
-            }
-            if (condition_type.equalsIgnoreCase("max_mana")) {
-                return ZZMana.getMaxMana(p) >= amount;
-            }
-            if (condition_type.equalsIgnoreCase("stamina")) {
-                return ZZStamina.getStamina(p) >= amount;
-            }
-            if (condition_type.equalsIgnoreCase("max_stamina")) {
-                return ZZStamina.getMaxStamina(p) >= amount;
-            }
+            return false;
         }
         return false;
     }
 }
+
